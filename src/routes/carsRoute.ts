@@ -18,4 +18,7 @@ Carroute.get('/cars', (req: Request, res: Response) =>
 Carroute.get('/cars/:id', (req: Request, res: Response) =>
   carController.readOne(req, res));
 
+Carroute.put('/cars/:id', (req: Request, res: Response) =>
+  carController.update(req, res));
+
 export default Carroute;

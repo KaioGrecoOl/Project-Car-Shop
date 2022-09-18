@@ -25,9 +25,18 @@ class CarService implements IService<ICar> {
   }
 
   public async readOne(_id: string): Promise<ICar> {
-    const frame = await this._cars.readOne(_id);
-    if (!frame) throw new Error(ErrorTypes.EntityNotFound);
-    return frame;
+    const car = await this._cars.readOne(_id);
+    if (!car) throw new Error(ErrorTypes.EntityNotFound);
+    return car;
+  }
+
+  public async update(_id: string, obj: ICar): Promise<ICar | null> {
+    const parsed = CarZodSchema.safeParse(obj);
+    if (!parsed.success) {
+      throw parsed.error;
+    }
+    await this.readOne(_id);
+    return this._cars.update(_id, obj);
   }
 }
 
