@@ -5,7 +5,7 @@ import * as sinon from 'sinon';
 import chai from 'chai';
 import CarService from '../../../services/CarService';
 import CarsModels from '../../../models/CarsModel';
-import { carMockWithId } from '../../mocks/carsMocks';
+import { carMockWithId, carMockWithoutId } from '../../mocks/carsMocks';
 import { ErrorTypes } from '../../../errors/catalog';
 const { expect } = chai;
 
@@ -40,6 +40,11 @@ describe('Car Service test', () => {
       'doorsQty',
       'seatsQty'])
     });
+
+    it('Success', async () => {
+      const car = await carService.create(carMockWithoutId);
+      expect(car).to.be.deep.eq(carMockWithId);
+    })
   })
 
   describe('ReadOne car', () => {
@@ -56,5 +61,4 @@ describe('Car Service test', () => {
       }
     })
   })
-    
 });
