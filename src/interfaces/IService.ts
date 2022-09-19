@@ -3,6 +3,7 @@ interface IService<T> {
   read():Promise<T[]>,
   readOne(_id: string): Promise<T>,
   update(id: string, body: T): Promise<T | null>
+  delete(_id: string): Promise<T | null>
 }
 
 export default IService;
